@@ -1,0 +1,3 @@
+[submodule "deps/zui"]
+	path = deps/zui
+	url = https://github.com/daqueenjodi/zui
