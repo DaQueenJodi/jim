@@ -42,7 +42,7 @@ const Buffer = struct {
             }
         }
         return .{ 
-            .window = try TuiWindow.init(alloc, 0, 0, 100, 50),
+            .window = try TuiWindow.init(0, 0, 100, 50),
             .data = data,
             .lines = lines,
             .allocator = alloc
@@ -53,7 +53,7 @@ const Buffer = struct {
         self.lines.deinit();
     }
     pub fn draw(self: *Self, writer: *TuiWriter) !void {
-        try self.window.draw(self.allocator, writer);
+        try self.window.draw(writer);
     }
 };
 
@@ -114,7 +114,7 @@ pub fn main() !void {
     const allocator = gpa.allocator();
     var jimctx = try JimCtx.fromFile(allocator, "src/main.zig");
     defer jimctx.deinit();
-    var ctx = try zui.TuiCtx.init();
+    var ctx = try zui.TuiCtx.init(allocator);
     defer ctx.deinit();
     try ctx.start();
     while (true) {
